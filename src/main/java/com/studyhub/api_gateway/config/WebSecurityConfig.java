@@ -41,7 +41,8 @@ public class WebSecurityConfig {
                     UsernamePasswordAuthenticationFilter.class
             )
             .authorizeHttpRequests(registry -> registry
-                .requestMatchers("/api/users/auth/**").permitAll()
+                .requestMatchers("/api/users/auth/login").permitAll()
+                .requestMatchers("/api/users/auth/register").permitAll()
                 .anyRequest().authenticated()
             );
 
