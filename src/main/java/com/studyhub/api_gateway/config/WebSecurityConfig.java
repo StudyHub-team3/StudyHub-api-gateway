@@ -43,6 +43,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(registry -> registry
                 .requestMatchers("/api/users/auth/login").permitAll()
                 .requestMatchers("/api/users/auth/register").permitAll()
+                .requestMatchers("/api/users/auth/refresh").permitAll()
                 .anyRequest().authenticated()
             );
 
@@ -55,7 +56,7 @@ public class WebSecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("*"));
 
