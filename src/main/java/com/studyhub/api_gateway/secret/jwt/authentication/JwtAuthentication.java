@@ -1,6 +1,5 @@
 package com.studyhub.api_gateway.secret.jwt.authentication;
 
-import com.sun.security.auth.UserPrincipal;
 import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
 package com.studyhub.api_gateway.gateway.filter;
 
-import com.sun.security.auth.UserPrincipal;
+import com.studyhub.api_gateway.secret.jwt.authentication.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.function.ServerRequest;
