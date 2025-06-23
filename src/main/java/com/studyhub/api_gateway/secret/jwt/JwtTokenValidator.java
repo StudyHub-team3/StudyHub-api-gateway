@@ -1,8 +1,9 @@
 package com.studyhub.api_gateway.secret.jwt;
 
 import com.studyhub.api_gateway.secret.jwt.authentication.JwtAuthentication;
+import com.studyhub.api_gateway.secret.jwt.authentication.UserPrincipal;
+import com.studyhub.api_gateway.secret.jwt.domain.repository.BlacklistAccessTokenRepository;
 import com.studyhub.api_gateway.secret.jwt.props.JwtConfigProperties;
-import com.sun.security.auth.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -22,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtTokenValidator {
     private final JwtConfigProperties jwtConfigProperties;
+    private final BlacklistAccessTokenRepository blacklistAccessTokenRepository;
+
     private volatile SecretKey secretKey;
 
     private SecretKey getSecretKey() {
@@ -56,6 +59,11 @@ public class JwtTokenValidator {
         final Claims claims = this.verifyAndGetClaims(token);
 
         if (claims == null) {
+            return null;
+        }
+
+        String jti = claims.getId();
+        if (jti == null || blacklistAccessTokenRepository.existsById(jti)) {
             return null;
         }
 
