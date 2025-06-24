@@ -54,8 +54,6 @@ public class JwtTokenValidator {
     }
 
     public JwtAuthentication validateToken(String token) {
-        String userId = null;
-
         final Claims claims = this.verifyAndGetClaims(token);
 
         if (claims == null) {
@@ -72,14 +70,15 @@ public class JwtTokenValidator {
             return null;
         }
 
-        userId = claims.getSubject();
-
         String tokenType = claims.get("tokenType", String.class);
         if (!"access".equals(tokenType)) {
             return null;
         }
 
-        UserPrincipal principal = new UserPrincipal(userId);
+        String userId = claims.getSubject();
+        String userName = claims.get("userName", String.class);
+
+        UserPrincipal principal = new UserPrincipal(userId, userName);
 
         return new JwtAuthentication(principal, token, getGrantedAuthorities("user"));
     }

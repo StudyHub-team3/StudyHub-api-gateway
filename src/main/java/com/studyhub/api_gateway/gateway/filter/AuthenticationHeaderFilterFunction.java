@@ -15,7 +15,11 @@ public class AuthenticationHeaderFilterFunction {
 
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if (principal instanceof UserPrincipal userPrincipal) {
-                requestBuilder.header("X-Auth-UserId", userPrincipal.getName());
+                requestBuilder.header("X-Auth-UserId", userPrincipal.getUserId());
+
+                requestBuilder.header("X-Auth-UserName", userPrincipal.getUserName());
+
+                log.info("X-Auth-UserId : {}, X-Auth-UserName : {}", userPrincipal.getUserId(), userPrincipal.getUserName());
 
                 // 필요 시, 사용자 권한 정보 추가
             }

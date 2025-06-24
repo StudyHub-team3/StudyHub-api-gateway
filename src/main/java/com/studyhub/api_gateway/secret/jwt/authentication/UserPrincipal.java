@@ -10,12 +10,17 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserPrincipal implements Principal {
     private final String userId;
+    private final String userName;
 
-    public boolean hasName() {
+    public boolean hasUserId() {
         return userId != null;
     }
+
+    public boolean hasName() {
+        return userName != null;
+    }
     public boolean hasMandatory() {
-        return userId != null;
+        return (this.hasName() && this.hasUserId());
     }
     @Override
     public String toString() {
@@ -38,6 +43,7 @@ public class UserPrincipal implements Principal {
         }
         return true;
     }
+
     @Override
     public int hashCode() {
         int result = userId != null ? userId.hashCode() : 0;
