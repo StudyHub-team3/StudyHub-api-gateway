@@ -19,8 +19,6 @@ public class AuthenticationHeaderFilterFunction {
 
                 requestBuilder.header("X-Auth-UserName", userPrincipal.getUserName());
 
-                log.info("X-Auth-UserId : {}, X-Auth-UserName : {}", userPrincipal.getUserId(), userPrincipal.getUserName());
-
                 // 필요 시, 사용자 권한 정보 추가
             }
 
