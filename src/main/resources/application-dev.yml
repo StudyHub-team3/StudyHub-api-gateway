@@ -2,5 +2,5 @@ spring:
   config:
     import:
       - file:/etc/config/application-dev.yml
-      - file:/etc/secret/application-jwt.yml
-      - file:/etc/secret/application-redis.yml
+      - file:/etc/secret/jwt/application-jwt.yml
+      - file:/etc/secret/redis/application-redis.yml
