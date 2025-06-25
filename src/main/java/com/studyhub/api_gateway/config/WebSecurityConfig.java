@@ -45,9 +45,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/users/auth/login").permitAll()
                 .requestMatchers("/api/users/auth/register").permitAll()
                 .requestMatchers("/api/users/auth/refresh").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/study-members/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/study-members/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/studies/my").authenticated()
-                .requestMatchers(HttpMethod.GET, "/api/studies/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/studies/**").permitAll()
                 .anyRequest().authenticated()
             );
 
