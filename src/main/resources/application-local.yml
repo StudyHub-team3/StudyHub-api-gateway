@@ -4,3 +4,18 @@ server:
 jwt:
   header: Authorization
   secret-key: ${JWT_KEY}
+
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: backend-user
+            uri: http://localhost:8081
+            predicates:
+              - Path=/api/users/**
+            filters:
+              - AddAuthenticationHeader
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
