@@ -49,7 +49,7 @@ public class ApiCommonAdvice {
     public ApiResponseDto<String> handleNoResourceFoundException(Exception e) {
         return ApiResponseDto.createError(
                 "NoResourceError",
-                "리소스를 찾을 수 없습니다."
+                e.getMessage()
         );
     }
 
