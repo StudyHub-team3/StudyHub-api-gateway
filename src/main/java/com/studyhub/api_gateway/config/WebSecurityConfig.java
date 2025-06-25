@@ -5,6 +5,7 @@ import com.studyhub.api_gateway.secret.jwt.JwtTokenValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -44,6 +45,9 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/users/auth/login").permitAll()
                 .requestMatchers("/api/users/auth/register").permitAll()
                 .requestMatchers("/api/users/auth/refresh").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/study-members/").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/studies/my").authenticated()
+                .requestMatchers(HttpMethod.GET, "/api/studies/").permitAll()
                 .anyRequest().authenticated()
             );
 
@@ -56,7 +60,7 @@ public class WebSecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("*"));
 
